@@ -38,7 +38,7 @@ public class ShipController  {
 
         if (shipDetails.getName() == null || shipDetails.getPlanet() == null
                 || shipDetails.getShipType() == null || shipDetails.getProdDate() == null
-                || shipDetails.getSpeed() == null || shipDetails.getCrewSize().equals(null)) {
+                || shipDetails.getSpeed() == null || shipDetails.getCrewSize() == null) {
             throw new ShipServiceException((ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage()));
         }
 
@@ -120,7 +120,7 @@ public class ShipController  {
 
         Long checkedId = null;
         try {
-            checkedId = new Long(id);
+            checkedId = id;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -203,7 +203,6 @@ public class ShipController  {
     @DeleteMapping(path = "/{id}")
     public void deleteShip(@PathVariable Long id) throws ShipNotFoundException, ShipServiceException {
 
-        //OperationStatusModel returnValue = new OperationStatusModel();
 
         if (id <= 0) {
             throw new ShipServiceException(ErrorMessages.WRONG_ARGUMENT.getErrorMessage());
@@ -211,13 +210,9 @@ public class ShipController  {
         if (!shipRepository.existsById(id) || !shipRepository.existsShipById(id)) {
             throw new ShipNotFoundException(ErrorMessages.WRONG_ARGUMENT.getErrorMessage());
         }
-        // returnValue.setOperationName(RequestOperationName.DELETE.name());
 
         shipService.deleteShip(id);
 
-        //   returnValue.setOperationResult(RequestOperationStatus.SUCCESS.name());
-
-        //  return returnValue;
     }
 }
 

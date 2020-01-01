@@ -107,7 +107,7 @@ public class ShipServiceImpl implements ShipService {
         List<Ship> ships;
         String sortFilter;
         if (allParams.containsKey("order")) {
-            ShipOrder shipOrder = ShipOrder.valueOf(allParams.get("order").toString());
+            ShipOrder shipOrder = ShipOrder.valueOf(allParams.get("order"));
             sortFilter = shipOrder.getFieldName();
             ships = (List<Ship>) shipRepository.findAll(Sort.by(Sort.Direction.ASC, sortFilter));
         } else {
@@ -115,49 +115,49 @@ public class ShipServiceImpl implements ShipService {
         }
 
         if (allParams.containsKey("name")) {
-            ships.removeIf(s -> !s.getName().contains((String)allParams.get("name")));
+            ships.removeIf(s -> !s.getName().contains(allParams.get("name")));
         }
         if (allParams.containsKey("planet")) {
-            ships.removeIf(s -> !s.getPlanet().contains((String)allParams.get("planet")));
+            ships.removeIf(s -> !s.getPlanet().contains(allParams.get("planet")));
         }
         if (allParams.containsKey("shipType")) {
-            ships.removeIf(s -> !s.getShipType().toString().equals(allParams.get("shipType").toString()));
+            ships.removeIf(s -> !s.getShipType().toString().equals(allParams.get("shipType")));
         }
         if (allParams.containsKey("after")) {
-            ships.removeIf(s -> s.getProdDate().getTime() < Long.parseLong(allParams.get("after").toString()));
+            ships.removeIf(s -> s.getProdDate().getTime() < Long.parseLong(allParams.get("after")));
         }
         if (allParams.containsKey("before")) {
-            ships.removeIf(s -> s.getProdDate().getTime() > Long.parseLong(allParams.get("before").toString()));
+            ships.removeIf(s -> s.getProdDate().getTime() > Long.parseLong(allParams.get("before")));
         }
         if (allParams.containsKey("isUsed")) {
             ships.removeIf(s -> !s.getUsed().toString().equals(allParams.get("isUsed")));
         }
         if (allParams.containsKey("minSpeed")) {
-            ships.removeIf(s -> s.getSpeed() < Double.parseDouble(allParams.get("minSpeed").toString()));
+            ships.removeIf(s -> s.getSpeed() < Double.parseDouble(allParams.get("minSpeed")));
         }
         if (allParams.containsKey("maxSpeed")) {
-            ships.removeIf(s -> s.getSpeed() > Double.parseDouble(allParams.get("maxSpeed").toString()));
+            ships.removeIf(s -> s.getSpeed() > Double.parseDouble(allParams.get("maxSpeed")));
         }
         if (allParams.containsKey("minCrewSize")) {
-            ships.removeIf(s -> s.getCrewSize() < Integer.parseInt(allParams.get("minCrewSize").toString()));
+            ships.removeIf(s -> s.getCrewSize() < Integer.parseInt(allParams.get("minCrewSize")));
         }
         if (allParams.containsKey("maxCrewSize")) {
-            ships.removeIf(s -> s.getCrewSize() > Integer.parseInt(allParams.get("maxCrewSize").toString()));
+            ships.removeIf(s -> s.getCrewSize() > Integer.parseInt(allParams.get("maxCrewSize")));
         }
         if (allParams.containsKey("minRating")) {
-            ships.removeIf(s -> s.getRating() < Double.parseDouble(allParams.get("minRating").toString()));
+            ships.removeIf(s -> s.getRating() < Double.parseDouble(allParams.get("minRating")));
         }
         if (allParams.containsKey("maxRating")) {
-            ships.removeIf(s -> s.getRating() > Double.parseDouble(allParams.get("maxRating").toString()));
+            ships.removeIf(s -> s.getRating() > Double.parseDouble(allParams.get("maxRating")));
         }
 
         int pageNumber = 0;
         if (allParams.containsKey("pageNumber")) {
-            pageNumber = Integer.parseInt(allParams.get("pageNumber").toString());
+            pageNumber = Integer.parseInt(allParams.get("pageNumber"));
         }
         int pageSize = 3;
         if (allParams.containsKey("pageSize")) {
-            pageSize = Integer.parseInt(allParams.get("pageSize").toString());
+            pageSize = Integer.parseInt(allParams.get("pageSize"));
         }
 
 
@@ -166,7 +166,7 @@ public class ShipServiceImpl implements ShipService {
 
         Pageable pageRequest = PageRequest.of(pageNumber, pageSize);
 
-        Page<Ship> shipPage = new PageImpl<Ship>(ships.subList(start, end), pageRequest, ships.size());
+        Page<Ship> shipPage = new PageImpl<>(ships.subList(start, end), pageRequest, ships.size());
 
         List<Ship> shipsToConvert = shipPage.getContent();
 
@@ -187,7 +187,7 @@ public class ShipServiceImpl implements ShipService {
         List<Ship> ships;
         String sortFilter;
         if (allParams.containsKey("order")) {
-            ShipOrder shipOrder = ShipOrder.valueOf(allParams.get("order").toString());
+            ShipOrder shipOrder = ShipOrder.valueOf(allParams.get("order"));
             sortFilter = shipOrder.getFieldName();
             ships = (List<Ship>) shipRepository.findAll(Sort.by(Sort.Direction.ASC, sortFilter));
         } else {
@@ -195,40 +195,40 @@ public class ShipServiceImpl implements ShipService {
         }
 
         if (allParams.containsKey("name")) {
-            ships.removeIf(s -> !s.getName().contains((String)allParams.get("name")));
+            ships.removeIf(s -> !s.getName().contains(allParams.get("name")));
         }
         if (allParams.containsKey("planet")) {
-            ships.removeIf(s -> !s.getPlanet().contains((String)allParams.get("planet")));
+            ships.removeIf(s -> !s.getPlanet().contains(allParams.get("planet")));
         }
         if (allParams.containsKey("shipType")) {
-            ships.removeIf(s -> !s.getShipType().toString().equals(allParams.get("shipType").toString()));
+            ships.removeIf(s -> !s.getShipType().toString().equals(allParams.get("shipType")));
         }
         if (allParams.containsKey("after")) {
-            ships.removeIf(s -> s.getProdDate().getTime() < Long.parseLong(allParams.get("after").toString()));
+            ships.removeIf(s -> s.getProdDate().getTime() < Long.parseLong(allParams.get("after")));
         }
         if (allParams.containsKey("before")) {
-            ships.removeIf(s -> s.getProdDate().getTime() > Long.parseLong(allParams.get("before").toString()));
+            ships.removeIf(s -> s.getProdDate().getTime() > Long.parseLong(allParams.get("before")));
         }
         if (allParams.containsKey("isUsed")) {
             ships.removeIf(s -> !s.getUsed().toString().equals(allParams.get("isUsed")));
         }
         if (allParams.containsKey("minSpeed")) {
-            ships.removeIf(s -> s.getSpeed() < Double.parseDouble(allParams.get("minSpeed").toString()));
+            ships.removeIf(s -> s.getSpeed() < Double.parseDouble(allParams.get("minSpeed")));
         }
         if (allParams.containsKey("maxSpeed")) {
-            ships.removeIf(s -> s.getSpeed() > Double.parseDouble(allParams.get("maxSpeed").toString()));
+            ships.removeIf(s -> s.getSpeed() > Double.parseDouble(allParams.get("maxSpeed")));
         }
         if (allParams.containsKey("minCrewSize")) {
-            ships.removeIf(s -> s.getCrewSize() < Integer.parseInt(allParams.get("minCrewSize").toString()));
+            ships.removeIf(s -> s.getCrewSize() < Integer.parseInt(allParams.get("minCrewSize")));
         }
         if (allParams.containsKey("maxCrewSize")) {
-            ships.removeIf(s -> s.getCrewSize() > Integer.parseInt(allParams.get("maxCrewSize").toString()));
+            ships.removeIf(s -> s.getCrewSize() > Integer.parseInt(allParams.get("maxCrewSize")));
         }
         if (allParams.containsKey("minRating")) {
-            ships.removeIf(s -> s.getRating() < Double.parseDouble(allParams.get("minRating").toString()));
+            ships.removeIf(s -> s.getRating() < Double.parseDouble(allParams.get("minRating")));
         }
         if (allParams.containsKey("maxRating")) {
-            ships.removeIf(s -> s.getRating() > Double.parseDouble(allParams.get("maxRating").toString()));
+            ships.removeIf(s -> s.getRating() > Double.parseDouble(allParams.get("maxRating")));
         }
 
         for (Ship ship: ships) {
